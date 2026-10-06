@@ -6,6 +6,7 @@ app = FastAPI()
 
 class QuestionRequest(BaseModel):
     question: str
+    course: str | None = None
 
 @app.get("/")
 def output():
@@ -13,5 +14,5 @@ def output():
 
 @app.post("/ask")
 def ask(request: QuestionRequest):
-    answer = ask_question(request.question)
+    answer = ask_question(request.question, course=request.course)
     return answer

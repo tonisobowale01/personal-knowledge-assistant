@@ -1,0 +1,18 @@
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment variables / secrets
+.env
+
+# Local ChromaDB storage
+chroma_db/
+
+# Personal school notes
+data/notes/*
+
+# Keep the folder itself in Git
+!data/notes/.gitkeep

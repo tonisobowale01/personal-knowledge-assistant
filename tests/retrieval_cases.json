@@ -1,0 +1,230 @@
+[
+  {
+    "question": "What is a bus topology?",
+    "course": "Networking",
+    "kind": "direct",
+    "history": [],
+    "expected_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "6"
+      }
+    ],
+    "answerable": true
+  },
+  {
+    "question": "How are devices connected in a bus network?",
+    "course": "Networking",
+    "kind": "paraphrase",
+    "history": [],
+    "expected_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "6"
+      }
+    ],
+    "answerable": true
+  },
+  {
+    "question": "What happens if the main bus cable fails?",
+    "course": "Networking",
+    "kind": "direct",
+    "history": [],
+    "expected_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "6"
+      }
+    ],
+    "answerable": true
+  },
+  {
+    "question": "How are devices connected in a star topology?",
+    "course": "Networking",
+    "kind": "direct",
+    "history": [],
+    "expected_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "7"
+      }
+    ],
+    "answerable": true
+  },
+  {
+    "question": "Compare bus and star topologies.",
+    "course": "Networking",
+    "kind": "comparison",
+    "history": [],
+    "expected_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "6"
+      },
+      {
+        "file": "networking summary.pdf",
+        "page": "7"
+      }
+    ],
+    "answerable": true
+  },
+  {
+    "question": "How does DNS translate a name into an IP address?",
+    "course": "Networking",
+    "kind": "direct",
+    "history": [],
+    "expected_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "2"
+      },
+      {
+        "file": "networking summary.pdf",
+        "page": "3"
+      }
+    ],
+    "answerable": true,
+    "match": "any"
+  },
+  {
+    "question": "What is FCFS?",
+    "course": "Operating Systems",
+    "kind": "direct",
+    "history": [],
+    "expected_sources": [
+      {
+        "file": "os_sample.txt",
+        "page": null
+      }
+    ],
+    "answerable": true
+  },
+  {
+    "question": "Which scheduler runs processes in arrival order?",
+    "course": "Operating Systems",
+    "kind": "paraphrase",
+    "history": [],
+    "expected_sources": [
+      {
+        "file": "os_sample.txt",
+        "page": null
+      }
+    ],
+    "answerable": true
+  },
+  {
+    "question": "What are the disadvantages of SJF?",
+    "course": "Operating Systems",
+    "kind": "direct",
+    "history": [],
+    "expected_sources": [
+      {
+        "file": "os_sample.txt",
+        "page": null
+      }
+    ],
+    "answerable": true
+  },
+  {
+    "question": "Why can short-job-first be unfair to long processes?",
+    "course": "Operating Systems",
+    "kind": "paraphrase",
+    "history": [],
+    "expected_sources": [
+      {
+        "file": "os_sample.txt",
+        "page": null
+      }
+    ],
+    "answerable": true
+  },
+  {
+    "question": "Compare FCFS and Round Robin.",
+    "course": "Operating Systems",
+    "kind": "comparison",
+    "history": [],
+    "expected_sources": [
+      {
+        "file": "os_sample.txt",
+        "page": null
+      }
+    ],
+    "answerable": true
+  },
+  {
+    "question": "What happens if its time quantum is too large?",
+    "course": "Operating Systems",
+    "kind": "follow-up",
+    "history": [
+      {
+        "role": "user",
+        "content": "Explain Round Robin scheduling."
+      },
+      {
+        "role": "assistant",
+        "content": "Round Robin gives each process a time quantum."
+      }
+    ],
+    "expected_sources": [
+      {
+        "file": "os_sample.txt",
+        "page": null
+      }
+    ],
+    "answerable": true
+  },
+  {
+    "question": "What happens if that central device fails?",
+    "course": "Networking",
+    "kind": "follow-up",
+    "history": [
+      {
+        "role": "user",
+        "content": "Explain star topology."
+      },
+      {
+        "role": "assistant",
+        "content": "Each device connects to a central hub or switch."
+      }
+    ],
+    "expected_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "7"
+      }
+    ],
+    "answerable": true
+  },
+  {
+    "question": "What is photosynthesis?",
+    "course": "Operating Systems",
+    "kind": "unsupported",
+    "history": [],
+    "expected_sources": [],
+    "answerable": false
+  },
+  {
+    "question": "What ingredients are needed to bake a chocolate cake?",
+    "course": "Networking",
+    "kind": "unsupported",
+    "history": [],
+    "expected_sources": [],
+    "answerable": false
+  },
+  {
+    "question": "Explain bus topology.",
+    "course": "Operating Systems",
+    "kind": "wrong-course",
+    "history": [],
+    "expected_sources": [],
+    "answerable": false
+  },
+  {
+    "question": "What is FCFS?",
+    "course": "A course that does not exist",
+    "kind": "empty-course",
+    "history": [],
+    "expected_sources": [],
+    "answerable": false
+  }
+]

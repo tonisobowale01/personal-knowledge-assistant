@@ -1,18 +1,52 @@
-# Virtual environment
+# Python environments and generated caches
 .venv/
-
-# Python cache
+venv/
 __pycache__/
-*.pyc
+*.py[cod]
+.pytest_cache/
 
-# Environment variables / secrets
+# Local environment settings; a documented example can be committed
 .env
+.env.*
+!.env.example
 
-# Local ChromaDB storage
-chroma_db/
+# Saved chats and SQLite sidecar files
+/chat_history.db
+/chat_history.db-*
+/chat_history.db.*
 
-# Personal school notes
-data/notes/*
+# Live and experimental vector indexes
+/chroma_db/
+/chunking_trial_db*/
 
-# Keep the folder itself in Git
-!data/notes/.gitkeep
+# Local service logs, process IDs and live-check output
+/.run/
+
+# Personal notes; keep the empty folder placeholder
+/data/notes/*
+!/data/notes/.gitkeep
+
+# Generated root-level experiment output (may contain note/chat excerpts).
+# These rules do not exclude fixtures in tests/ or metadata in benchmarks/.
+/answer_*.json
+/baseline_*.json
+/chunking_*.json
+/compact_*.json
+/context_report.json
+/cpu_report.json
+/followup_check.json
+/retrieval_*.json
+/sjf_scope_before_reset.json
+/top_k_*.json
+
+# Generated answer reports; retain hand-written guides and summary docs
+/answer_baseline.md
+/answer_fixes*.md
+/answer_system_check.md
+/baseline_full.md
+/chunking_baseline_replay_smoke.md
+/chunking_scope_check.md
+/chunking_trial*.md
+/retrieval_answer_baseline.md
+/ANSWER_PROMPT_TRIAL.md
+/TOP_K_COMPARISON.md

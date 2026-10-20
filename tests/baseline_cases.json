@@ -1,0 +1,102 @@
+[
+  {
+    "question": "What is SJF?",
+    "kind": "definition",
+    "expected_points": [
+      "Shortest Job First selects the next process with the shortest estimated CPU burst.",
+      "Ordinary SJF is non-preemptive; SRTF is its preemptive variant."
+    ],
+    "reference_sources": [
+      {
+        "file": "os_sample.txt",
+        "page": null
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": [
+      "Do not describe ordinary SJF as preemptive."
+    ],
+    "id": "sjf_all",
+    "course": null
+  },
+  {
+    "question": "What is SJF?",
+    "kind": "definition",
+    "expected_points": [
+      "Shortest Job First selects the next process with the shortest estimated CPU burst.",
+      "Ordinary SJF is non-preemptive; SRTF is its preemptive variant."
+    ],
+    "reference_sources": [
+      {
+        "file": "os_sample.txt",
+        "page": null
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": [
+      "Do not describe ordinary SJF as preemptive."
+    ],
+    "id": "sjf_os",
+    "course": "Operating Systems"
+  },
+  {
+    "question": "What is SJF?",
+    "kind": "wrong_course",
+    "expected_points": [
+      "Decline: the selected Networking notes do not support an SJF definition."
+    ],
+    "reference_sources": [],
+    "history": [],
+    "unsupported_claims_to_check": [
+      "Do not describe ordinary SJF as preemptive."
+    ],
+    "id": "sjf_networking",
+    "course": "Networking"
+  },
+  {
+    "id": "bus_all",
+    "question": "What is a bus topology?",
+    "course": null,
+    "kind": "definition",
+    "expected_points": [
+      "Devices share a central cable."
+    ],
+    "reference_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "6"
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "bus_networking",
+    "question": "What is a bus topology?",
+    "course": "Networking",
+    "kind": "definition",
+    "expected_points": [
+      "Devices share a central cable."
+    ],
+    "reference_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "6"
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "unsupported_all",
+    "question": "What is photosynthesis?",
+    "course": null,
+    "kind": "unsupported",
+    "expected_points": [
+      "Explicitly state that the selected notes do not support an answer."
+    ],
+    "reference_sources": [],
+    "history": [],
+    "unsupported_claims_to_check": []
+  }
+]

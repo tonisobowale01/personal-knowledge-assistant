@@ -1,71 +1,32 @@
+from pathlib import Path
 import chromadb
 import ollama
 from llama_index.core import SimpleDirectoryReader
 from llama_index.readers.file import PDFReader
-from llama_index.core.node_parser import SentenceSplitter
-# import os
+from app.chunking import chunk_document
 
-# print(os.getcwd())
-# print(os.path.exists("data"))
-# print(os.path.exists("data/notes"))
-# print(os.listdir("data"))
-
-
-client = chromadb.PersistentClient(path="chroma_db")
-
+client = chromadb.PersistentClient(path=str(Path(__file__).resolve().parent / "chroma_db"))
 collection = client.get_or_create_collection(name="test_notes")
 
-parser = PDFReader()
 
-documents = SimpleDirectoryReader(input_dir="data/notes", file_extractor={".pdf": parser}).load_data()
-
-# print(f"Loaded {len(documents)} documets/pages")
-
-splitter = SentenceSplitter(chunk_size=512, chunk_overlap=50)
-nodes = splitter.get_nodes_from_documents(documents)
-
-# print(f"Loaded {len(documents)} documents/pages")
-# print(f"Created {len(nodes)} nodes")
-
-documents_to_store = []
-embeddings = []
-metadatas = []
-ids = []
-
-for i, node in enumerate(nodes):
-    text = node.text
-    file_name = node.metadata.get("file_name", "unknown")
-    page = node.metadata.get("page_label", "unknown")
-
-    chunk_id = f"{file_name}-page-{page}-chunk-{i}"
-
-    response = ollama.embed(
-        model="nomic-embed-text",
-        input=text
-    )
-
-    metadata = dict(node.metadata)
-
-    if file_name == "networking summary.pdf":
-        metadata["course"] = "Networking"
-    elif file_name == "os_sample.txt":
-        metadata["course"] = "Operating Systems"
-
-    documents_to_store.append(text)
-    embeddings.append(response["embeddings"][0])
-    metadatas.append(metadata)
-    ids.append(chunk_id)
-
-# print(len(documents_to_store))
-# print(len(embeddings))
-# print(len(metadatas))
-# print(len(ids))
-
-collection.upsert(
-    ids=ids,
-    documents=documents_to_store,
-    embeddings=embeddings,
-    metadatas=metadatas
-)
-
-print("Stored chunks:", collection.count())
+def ingest_file(file_path, course):
+    documents = SimpleDirectoryReader(input_files=[str(file_path)], file_extractor={".pdf": PDFReader()}).load_data()
+    nodes = [node for document in documents for node in chunk_document(document)]
+    if not nodes:
+        raise ValueError("No extractable text found in this document")
+    file_name = Path(file_path).name
+    existing = collection.get(where={"file_name": file_name}, include=[])["ids"]
+    texts, embeddings, metadatas, ids = [], [], [], []
+    # Finish extraction and all embedding calls before changing the existing index.
+    for i, node in enumerate(nodes):
+        response = ollama.embed(model="nomic-embed-text", input=node.text)
+        texts.append(node.text)
+        embeddings.append(response["embeddings"][0])
+        metadatas.append({**node.metadata, "file_name": file_name, "course": course, "chunk_policy": "structure_v2"})
+        ids.append(f"{file_name}-page-{node.metadata.get('page_label', 'unknown')}-chunk-{i}")
+    collection.upsert(ids=ids, documents=texts, embeddings=embeddings, metadatas=metadatas)
+    # Upsert alone leaves old IDs behind when the new document has fewer chunks.
+    obsolete = sorted(set(existing) - set(ids))
+    if obsolete:
+        collection.delete(ids=obsolete)
+    return len(nodes)

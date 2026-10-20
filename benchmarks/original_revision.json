@@ -1,0 +1,5 @@
+{
+  "commit": "87b9c0365bbc9544e7d837c677fa17ef5a532925",
+  "path": "app/rag.py",
+  "note": "Exact committed source; benchmark reference, not imported by the application."
+}

@@ -1,0 +1,375 @@
+[
+  {
+    "id": "q01",
+    "question": "What is a bus topology?",
+    "course": "Networking",
+    "kind": "definition",
+    "expected_points": [
+      "Devices share a central cable."
+    ],
+    "reference_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "6"
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q02",
+    "question": "What happens if the main bus cable fails?",
+    "course": "Networking",
+    "kind": "failure",
+    "expected_points": [
+      "The whole network goes down."
+    ],
+    "reference_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "6"
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q03",
+    "question": "What is a star topology?",
+    "course": "Networking",
+    "kind": "definition",
+    "expected_points": [
+      "Devices connect through a central hub or switch."
+    ],
+    "reference_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "7"
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q04",
+    "question": "What happens if the central hub in a star topology fails?",
+    "course": "Networking",
+    "kind": "failure",
+    "expected_points": [
+      "The whole network is disabled."
+    ],
+    "reference_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "7"
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q05",
+    "question": "Compare bus and star topologies.",
+    "course": "Networking",
+    "kind": "comparison",
+    "expected_points": [
+      "Bus uses a shared cable; star uses a central hub or switch.",
+      "Central cable failure and central hub failure can both disable the whole network.",
+      "Failure of one star-connected device does not affect others."
+    ],
+    "reference_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "6"
+      },
+      {
+        "file": "networking summary.pdf",
+        "page": "7"
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": [
+      "Star is more expensive or complex.",
+      "Star remains operational after central hub failure."
+    ]
+  },
+  {
+    "id": "q06",
+    "question": "How does DNS help you visit a website?",
+    "course": "Networking",
+    "kind": "paraphrase",
+    "expected_points": [
+      "DNS resolves a domain name to an IP address.",
+      "The computer uses that address to reach the website."
+    ],
+    "reference_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "2"
+      },
+      {
+        "file": "networking summary.pdf",
+        "page": "3"
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q07",
+    "question": "What is a socket?",
+    "course": "Networking",
+    "kind": "definition",
+    "expected_points": [
+      "A combination of an IP address and a port number."
+    ],
+    "reference_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "3"
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q08",
+    "question": "What does an operating system do?",
+    "course": "Operating Systems",
+    "kind": "definition",
+    "expected_points": [
+      "Manages hardware, supports application programs, and mediates between users and hardware."
+    ],
+    "reference_sources": [
+      {
+        "file": "Introduction to Operating Systems.pdf",
+        "page": "2"
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q09",
+    "question": "What is virtualization?",
+    "course": "Operating Systems",
+    "kind": "definition",
+    "expected_points": [
+      "Abstracts one computer into multiple execution environments.",
+      "Environments appear to run on private computers."
+    ],
+    "reference_sources": [
+      {
+        "file": "Introduction to Operating Systems.pdf",
+        "page": "21"
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q10",
+    "question": "What is clustering?",
+    "course": "Operating Systems",
+    "kind": "definition",
+    "expected_points": [
+      "Provides high availability through multiple monitored systems.",
+      "A surviving node can take over storage and restart applications after another fails."
+    ],
+    "reference_sources": [
+      {
+        "file": "Introduction to Operating Systems.pdf",
+        "page": "13"
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": [
+      "Graceful degradation alone is the definition of clustering."
+    ]
+  },
+  {
+    "id": "q11",
+    "question": "What is a multicore system?",
+    "course": "Operating Systems",
+    "kind": "definition",
+    "expected_points": [
+      "Multiple CPU cores on one chip, enabling more efficient communication."
+    ],
+    "reference_sources": [
+      {
+        "file": "Introduction to Operating Systems.pdf",
+        "page": "11"
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q12",
+    "question": "What is virtualization, clustering, and a multicore system?",
+    "course": "Operating Systems",
+    "kind": "multipart",
+    "expected_points": [
+      "Explain virtualization as multiple execution environments.",
+      "Explain clustering as high availability and failover.",
+      "Explain multicore as multiple CPU cores on one chip."
+    ],
+    "reference_sources": [
+      {
+        "file": "Introduction to Operating Systems.pdf",
+        "page": "21"
+      },
+      {
+        "file": "Introduction to Operating Systems.pdf",
+        "page": "13"
+      },
+      {
+        "file": "Introduction to Operating Systems.pdf",
+        "page": "11"
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q13",
+    "question": "Compare asymmetric and symmetric clustering.",
+    "course": "Operating Systems",
+    "kind": "comparison",
+    "expected_points": [
+      "Asymmetric: standby host monitors the active host.",
+      "Symmetric: multiple active hosts monitor each other."
+    ],
+    "reference_sources": [
+      {
+        "file": "Introduction to Operating Systems.pdf",
+        "page": "14"
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q14",
+    "question": "What is FCFS scheduling?",
+    "course": "Operating Systems",
+    "kind": "definition",
+    "expected_points": [
+      "Runs processes in arrival order.",
+      "Non-preemptive."
+    ],
+    "reference_sources": [
+      {
+        "file": "os_sample.txt",
+        "page": null
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q15",
+    "question": "Why can SJF be unfair to long processes?",
+    "course": "Operating Systems",
+    "kind": "paraphrase",
+    "expected_points": [
+      "Long processes may wait indefinitely: starvation."
+    ],
+    "reference_sources": [
+      {
+        "file": "os_sample.txt",
+        "page": null
+      }
+    ],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q16",
+    "question": "What happens if its time quantum is too large?",
+    "course": "Operating Systems",
+    "kind": "followup",
+    "expected_points": [
+      "Round Robin behaves like FCFS when its quantum is too large."
+    ],
+    "reference_sources": [
+      {
+        "file": "os_sample.txt",
+        "page": null
+      }
+    ],
+    "history": [
+      {
+        "role": "user",
+        "content": "Explain Round Robin scheduling."
+      },
+      {
+        "role": "assistant",
+        "content": "Round Robin gives each process a fixed time quantum."
+      }
+    ],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q17",
+    "question": "What happens if that central device fails?",
+    "course": "Networking",
+    "kind": "followup",
+    "expected_points": [
+      "The central star hub failure disables the whole network."
+    ],
+    "reference_sources": [
+      {
+        "file": "networking summary.pdf",
+        "page": "7"
+      }
+    ],
+    "history": [
+      {
+        "role": "user",
+        "content": "Explain star topology."
+      },
+      {
+        "role": "assistant",
+        "content": "Devices connect to a central hub or switch."
+      }
+    ],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q18",
+    "question": "What is photosynthesis?",
+    "course": "Operating Systems",
+    "kind": "unsupported",
+    "expected_points": [
+      "Explicitly state that the selected notes do not support an answer."
+    ],
+    "reference_sources": [],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q19",
+    "question": "Explain bus topology.",
+    "course": "Operating Systems",
+    "kind": "wrong_course",
+    "expected_points": [
+      "Do not give a networking definition from unrelated OS passages; acknowledge missing support."
+    ],
+    "reference_sources": [],
+    "history": [],
+    "unsupported_claims_to_check": []
+  },
+  {
+    "id": "q20",
+    "question": "What is FCFS?",
+    "course": "A course that does not exist",
+    "kind": "empty_course",
+    "expected_points": [
+      "Report that no supporting notes were found."
+    ],
+    "reference_sources": [],
+    "history": [],
+    "unsupported_claims_to_check": []
+  }
+]

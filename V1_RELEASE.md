@@ -1,5 +1,25 @@
 # Ash version 1: local-use release
 
+## Current freeze — October 27, 2026
+
+Version 1 is feature-frozen for local use. No further model, prompt, chunking, hybrid-search or feature experiments are part of this milestone. Use it for real study sessions and reopen work only for repeated disruptive failures.
+
+Current implementation includes the October 26 follow-up updates: collapsible source previews, transfer/processing upload feedback and duplicate prevention, nonblocking ingestion, person-pronoun topic context, and Live Preview's page-level no-reload safeguard. Retrieval uses one semantic search over up to 20 candidates and selects five full passages using a lightweight heading hint. The model, original answer instructions and source index are preserved.
+
+The final automated pass has **34 passing backend tests** and passing frontend flow checks. This covers chat persistence/isolation/rename/delete, stream framing and failure recovery, ingestion/chunking, previews, upload states and duplicate prevention, source disclosures and the Live Preview safeguard. These flow tests use isolated data and mocked generation; they are not proof that every generated answer is correct.
+
+The final live acceptance check is recorded privately in `.run/v1_final_check.json`: exactly three independent deadlock phrasings, real streamed responses, PDF/text preview byte ranges and the frontend-origin CORS preflight. No saved chats or documents are created by that check. The October 26 browser checks verified the source disclosure and reproduced then fixed database-write-triggered Live Preview resets; a new full browser suite was not run for this freeze.
+
+All three final answers named the four conditions correctly and completed with incremental response events. The first gave an abbreviated circular-wait explanation, the second listed names only, and the third included definitions. This is a core-answer check, not proof of uniformly complete explanations or general accuracy. Runtime caches were warm, so these timings do not establish a speed improvement. Preview byte ranges and CORS checks passed, the saved-chat list was unchanged, and `pip check` found no broken requirements.
+
+**Known limits remain:** the Wagner-theatre answer is inconsistent and the notes distinguish a named patron from an explicitly identified builder; other answers can omit or mix facts. Heading hints and follow-up references remain approximate, CPU generation is slow, upload/index replacement is not transactional, historical source links are not restored when reopening chats, and clean-machine installation is unverified. See `ISSUES_FOLLOWUP.md`, `RETRIEVAL_HEADING_CHECK.md` and the current README.
+
+The Git review should include application code, tests, the setup scripts and direct dependencies, useful documentation and any deliberately selected baseline/development tools. Notes, chats, vector indexes, local environment files, runtime logs and generated answer traces remain ignored. No commit or push is implied by this release checklist.
+
+The earlier October 19 release notes below are historical; their test counts and original five-neighbor retrieval policy are superseded by this section.
+
+---
+
 Release pass completed October 19, 2026 in `C:\Users\tonis\Documents\ash`.
 
 This milestone packages the existing local assistant for use. It does not certify every generated answer as correct or claim that the model's factual limitations have been solved.

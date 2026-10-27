@@ -2,7 +2,7 @@
 
 A local study assistant for PDF and text notes. Upload notes under a course, ask questions, continue saved conversations, and open original documents from answer sources.
 
-Version 1 uses FastAPI, a plain HTML/JavaScript frontend, SQLite chats, ChromaDB retrieval, LlamaIndex and Ollama. No cloud model or API key is required. Answers can still contain mistakes; check important details against the previewed notes.
+Version 1 uses FastAPI, a plain HTML/JavaScript frontend, SQLite chats, ChromaDB retrieval, LlamaIndex and Ollama. No cloud model or API key is required. Answers can still contain mistakes; check important details against the previewed notes. Version 1 is feature-frozen as of October 27, 2026; the next step is everyday use, with fixes reserved for repeated disruptive problems.
 
 ## Start using it on this computer
 
@@ -21,6 +21,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\Stop-Ash.ps1
 ```
 
 Stopping leaves Ollama and saved data in place. After changing backend code, stop Ash and start it again. Closing the startup console alone does not stop background services. Logs are in `.run/backend.stderr.log` and `.run/frontend.stderr.log`; they can contain question text.
+
+If using VS Code Live Preview, the page disables its automatic reloads so database/index writes cannot erase a conversation in progress. Refresh manually after editing the frontend. Keep your backend terminal running while using the app.
 
 ## One-time setup on another Windows computer
 
@@ -51,7 +53,7 @@ Select a course to narrow ambiguous questions. Rephrase vague questions with the
 
 - Persistent chats: create, reopen, continue, rename and delete.
 - Course filtering, PDF/text ingestion and persistent document chunks.
-- Five-chunk semantic retrieval with a lightweight user-topic anchor for follow-ups.
+- One semantic search over up to 20 candidates, followed by a lightweight heading-match selection of five full passages, with a user-topic anchor for follow-ups.
 - Streamed answers and retrieval/generation timing logs.
 - Document listing, deletion and previews served on demand.
 - Startup/shutdown helpers and automated flow checks.
@@ -60,7 +62,7 @@ Select a course to narrow ambiguous questions. Rephrase vague questions with the
 
 - The model can omit facts, confuse nearby subjects or invent claims even when the correct notes are retrieved. Comparisons and questions with several parts remain less reliable. A refusal is not proof the answer is absent from the full document.
 - The follow-up resolver is a small heuristic, not full language understanding. It retains the latest explicit user topic, but ambiguous references may need rephrasing.
-- Retrieval ranks can be imperfect. Relevant information sometimes appears third or fourth, so five chunks remain the default. Hybrid search and reranking are not enabled.
+- Retrieval ranks can be imperfect. The heading-match selection helps recover some lower-ranked evidence while keeping five passages in the answer prompt. It is not a separate lexical index or learned reranker, and does not guarantee complete coverage. See [RETRIEVAL_HEADING_CHECK.md](RETRIEVAL_HEADING_CHECK.md) for the focused validation and remaining limits.
 - On the tested CPU-only laptop, fresh-prompt answers commonly take tens of seconds; longer prompts can take over a minute. Streaming cannot remove prompt-processing time. Timings vary with caching and answer length.
 - Scanned/image-only PDFs, diagrams and complicated layouts may not extract useful text. Previews themselves do not invoke the model or create embeddings.
 - Sources list retrieved passages, not independently verified citations for every claim. Refusals can still show retrieved source links.
@@ -85,4 +87,4 @@ node tests/test_frontend.cjs
 
 Python tests use isolated databases and mocked generation for flow checks. Frontend checks simulate its DOM and requests; they do not replace manual browser testing. Node is needed for frontend checks, not for running Ash. See [V1_RELEASE.md](V1_RELEASE.md) for the release checklist and live-check results.
 
-The architecture and standalone answer prompt remain the baseline. The larger prompt experiment was rejected; see [ANSWER_PROMPT_TRIAL.md](ANSWER_PROMPT_TRIAL.md). The smaller chunk-count experiments were not promoted; see [TOP_K_COMPARISON.md](TOP_K_COMPARISON.md).
+The standalone answer instructions remain the original baseline; only retrieval selection and follow-up context have deliberate changes. The larger prompt and smaller chunk-count experiments were not promoted. Their generated answer reports (`ANSWER_PROMPT_TRIAL.md` and `TOP_K_COMPARISON.md`) are local development artifacts excluded from Git, not required setup files. Current retained summaries are in [V1_RELEASE.md](V1_RELEASE.md) and [RETRIEVAL_HEADING_CHECK.md](RETRIEVAL_HEADING_CHECK.md).

@@ -23,7 +23,7 @@ class Retrieval(unittest.TestCase):
         embed = Mock(return_value=[1])
         retrieve('What is SJF?', None, collection, embed)
         embed.assert_called_once_with('What is SJF?')
-        collection.query.assert_called_once_with(query_embeddings=[[1]], n_results=5,
+        collection.query.assert_called_once_with(query_embeddings=[[1]], n_results=20,
             include=['documents','metadatas','distances'])
 
     def test_selected_course_adds_only_metadata_filter(self):
@@ -66,7 +66,10 @@ class Retrieval(unittest.TestCase):
             prompt,sources,_,passages,resolved=modules['baseline'].prepare_evidence('What is SJF?',course)
             self.assertEqual(prompt,original_prompt)
             self.assertEqual(sources,original['sources'])
-            self.assertEqual(collection.query.call_args.kwargs,original_query)
+            current_query=collection.query.call_args.kwargs
+            self.assertEqual(current_query['n_results'],20)
+            self.assertEqual({k:v for k,v in current_query.items() if k!='n_results'},
+                             {k:v for k,v in original_query.items() if k!='n_results'})
             self.assertEqual(resolved,'What is SJF?')
             self.assertEqual(len(passages),2)
 
@@ -126,6 +129,31 @@ class Retrieval(unittest.TestCase):
         answer=modules['baseline'].ask_question('Missing')
         self.assertEqual(answer,{'answer':'I could not find that in the notes.','sources':[]})
         model.stream_complete.assert_not_called()
+
+    def test_person_references_keep_explicit_user_topic(self):
+        history=[SimpleNamespace(role='user',content='Who is Wagner?'),
+                 SimpleNamespace(role='assistant',content='Richard Wagner.'),
+                 SimpleNamespace(role='user',content='Who was he?'),
+                 SimpleNamespace(role='assistant',content='Richard Wagner.')]
+        for question in ['What did he believe in?','What is unique about him?','What were his ideas?']:
+            self.assertEqual(retrieval_query(question,history),'Who is Wagner?\nFollow-up: '+question)
+        self.assertEqual(retrieval_query('Who is Puccini?',history),'Who is Puccini?')
+        self.assertEqual(retrieval_query('Who is her father?',[SimpleNamespace(role='user',content='Who leads the Valkyries?')]),
+                         'Who leads the Valkyries?\nFollow-up: Who is her father?')
+
+    def test_heading_match_recovers_relevant_lower_ranked_evidence_without_more_prompt_passages(self):
+        collection=Mock()
+        texts=['General background\nBackground details']*8+['Resource waiting conditions\nAll necessary conditions and their meaning']
+        collection.query.return_value=result(texts,[.2+i*.02 for i in range(len(texts))])
+        evidence=retrieve('What conditions apply to resources?',None,collection,lambda q:[1])
+        self.assertEqual(len(evidence['candidates']),9)
+        self.assertEqual(len(evidence['passages']),5)
+        self.assertEqual(evidence['passages'][0]['id'],'8')
+        self.assertEqual(evidence['passages'][0]['text'],texts[-1])
+
+    def test_heading_match_cannot_bypass_weak_semantic_gate(self):
+        collection=Mock();collection.query.return_value=result(['Exact requested topic'],[1.2])
+        self.assertEqual(retrieve('Exact requested topic',None,collection,lambda q:[1])['passages'],[])
 
 
 if __name__ == '__main__':

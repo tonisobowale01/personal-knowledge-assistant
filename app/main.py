@@ -10,6 +10,7 @@ from pathlib import Path
 from ingest_notes import ingest_file
 from fastapi import Form
 from fastapi.responses import FileResponse, StreamingResponse
+from starlette.concurrency import run_in_threadpool
 from chat_db import create_chat, add_exchange, get_messages, get_chats, get_chat, initialize_database, rename_chat, delete_chat
 
 NOTES_DIR = Path(__file__).resolve().parents[1] / "data" / "notes"
@@ -91,7 +92,8 @@ async def upload_note(file: UploadFile = File(...), course: str = Form(...)):
     print("Saved path:", file_path)
     print("File exists:", file_path.exists())
 
-    chunk_count = ingest_file(file_path, course)
+    # PDF parsing and embedding calls must not block the API's event loop.
+    chunk_count = await run_in_threadpool(ingest_file, file_path, course)
 
     return {
         "filename": file.filename,

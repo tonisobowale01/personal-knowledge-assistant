@@ -154,6 +154,23 @@ class Chats(unittest.TestCase):
         self.assertEqual(events[-1]['type'],'error')
         self.assertEqual(chat_db.get_messages(cid),[])
 
+    def test_upload_finishes_ingestion_in_worker_before_acknowledging(self):
+        import asyncio
+        def process(path, course):
+            self.assertEqual(path.read_bytes(),b'Sample notes')
+            self.assertEqual(course,'Test course')
+            with self.assertRaises(RuntimeError):
+                asyncio.get_running_loop()
+            return 2
+        previous=main.ingest_file.side_effect
+        main.ingest_file.side_effect=process
+        try:
+            response=self.client.post('/upload',files={'file':('sample.txt',b'Sample notes','text/plain')},data={'course':'Test course'})
+            self.assertEqual(response.status_code,200)
+            self.assertEqual(response.json()['chunks_stored'],2)
+        finally:
+            main.ingest_file.side_effect=previous
+
     def test_real_http_delivers_delta_before_completion(self):
         import json
         import socket

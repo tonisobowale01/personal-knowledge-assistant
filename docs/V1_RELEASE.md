@@ -67,4 +67,4 @@ The model can still invent or mix facts, give incomplete definitions, or miss a 
 
 The scope of this release is a usable local study assistant with persistent chats, streamed answers, course-filtered retrieval and document previews. Factual accuracy must still be checked against the notes. Further prompt, model, chunk-count, hybrid-search and reranking experiments are deferred; none is silently enabled here.
 
-Start using the application at **http://127.0.0.1:3000**. See [README.md](README.md) for the single startup command and backups.
+Start using the application at **http://127.0.0.1:3000**. See [README.md](../README.md) for the single startup command and backups.

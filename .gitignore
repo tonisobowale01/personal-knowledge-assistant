@@ -50,3 +50,6 @@ __pycache__/
 /retrieval_answer_baseline.md
 /ANSWER_PROMPT_TRIAL.md
 /TOP_K_COMPARISON.md
+
+# Private evaluation outputs and reviewed-only archive material
+/evaluation/private/
